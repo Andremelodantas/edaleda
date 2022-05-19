@@ -11,10 +11,9 @@ public class MetodosRecursivos {
 		System.out.println("n! = " + calcularFatorial(6));
 		System.out.println("e-nesimo = " +calcularFibonnaci(7));
 		int posicao = 0;
-		int contagem  = 0;
-		System.out.println("Não nulos = " + countNotNull(nulos,posicao, contagem));
+		System.out.println("Não nulos = " + countNotNull(nulos,posicao));
 		int calculo = 2;
-		System.out.println(potenciade2(3,calculo));
+		System.out.println(potenciade2(2,calculo));
 
 	}
 	
@@ -48,18 +47,26 @@ public class MetodosRecursivos {
 	}
 	*/
 	
-	public static int countNotNull(Object[] nulos, int posicao,int contagem) {
+	public static int countNotNull(Object[] nulos, int posicao) {
+		int contagem = 0;
+		return countNotNullPrivate(nulos, posicao, contagem);
+	}
+	
+	private static int countNotNullPrivate(Object[] nulos, int posicao,int contagem) {
 		if(posicao == nulos.length) {
 			return contagem;
 		}
 		else if (Objects.isNull(nulos[posicao]) == false) {
-			return contagem+=1 + countNotNull(nulos, posicao+1,contagem);	
+			return contagem+=1 + countNotNullPrivate(nulos, posicao+1,contagem);	
 		}
-		return countNotNull(nulos, posicao+1,contagem);
+		return countNotNullPrivate(nulos, posicao+1,contagem);
 	}
+	
+	
+	
 	//dps termino, erro
 	public static int potenciade2(int expoente,int calculo) {
-		if(expoente == 0)return calculo;
+		if(expoente == 1)return calculo;
 		return calculo *= potenciade2(expoente-1, calculo);
 	}
 
